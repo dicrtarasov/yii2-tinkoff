@@ -1,7 +1,7 @@
 <?php
 /**
  * @author Igor A Tarasov <develop@dicr.org>, http://dicr.org
- * @version 01.07.20 05:53:12
+ * @version 01.07.20 17:20:19
  */
 
 declare(strict_types = 1);
@@ -43,7 +43,7 @@ class TinkoffCreditFormWidget extends Widget
     public const SHOWCASE_TEST_ID = self::SHOP_TEST_ID;
 
     /** @var string код услуги "Купить в кредит" */
-    public const PROMO_DEFAULT = 'credit';
+    public const PROMO_DEFAULT = 'default';
 
     /** @var string код услуги "Купить в рассрочку 0-0-3" */
     public const PROMO_INSTALLMENT = 'installment_0_0_3';
