@@ -1,7 +1,7 @@
 <?php
 /**
  * @author Igor A Tarasov <develop@dicr.org>, http://dicr.org
- * @version 01.07.20 17:20:19
+ * @version 01.07.20 18:45:17
  */
 
 declare(strict_types = 1);
@@ -258,20 +258,24 @@ class TinkoffCreditFormWidget extends Widget
     {
         if (! empty($this->ym)) {
             ob_start();
+            // @formatter:off
             ?>
-            $("#<?= $this->id ?>").on("submit", function() {
-            if (window.Ya && window.Ya._metrika && window.Ya._metrika.counters) {
-            Object.values(window.Ya._metrika.counters).forEach(function(counter) {
-            counter.reachGoal("<?= $this->ym ?>");
-            });
-            }
-            });
+            window.document.getElementById("<?= $this->id ?>").onsubmit = function() {
+                if (window.Ya && window.Ya._metrika && window.Ya._metrika.counters) {
+                    Object.values(window.Ya._metrika.counters).forEach(function(counter) {
+                        counter.reachGoal("<?= $this->ym ?>");
+                    });
+                }
+            };
             <?php
+            // @formatter:on
             $this->view->registerJs(ob_get_clean());
         }
 
         if (! empty($this->autoSubmit)) {
-            $this->view->registerJs('$("#' . $this->id . '").trigger("submit");');
+            $this->view->registerJs(
+                'window.document.getElementById("' . $this->id . '").submit()'
+            );
         }
 
         ob_start();
