@@ -26,6 +26,7 @@
       <path value="$PROJECT_DIR$/vendor/cebe/markdown" />
       <path value="$PROJECT_DIR$/vendor/yiisoft/yii2" />
       <path value="$PROJECT_DIR$/vendor/bower-asset/yii2-pjax" />
+      <path value="$PROJECT_DIR$/vendor/dicr/yii2-validate" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7.2" />
@@ -106,5 +107,10 @@
       <extension name="zend" enabled="false" />
       <extension name="zmq" enabled="false" />
     </extensions>
+  </component>
+  <component name="PhpUnit">
+    <phpunit_settings>
+      <PhpUnitSettings custom_loader_path="$PROJECT_DIR$/vendor/autoload.php" />
+    </phpunit_settings>
   </component>
 </project>

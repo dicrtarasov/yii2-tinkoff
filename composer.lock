@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a9a955552bd40db7a7dd1b840bf58c23",
+    "content-hash": "4c12e6aeb865eb17957c7742e626d7e2",
     "packages": [
         {
             "name": "bower-asset/inputmask",
@@ -29,16 +29,16 @@
         },
         {
             "name": "bower-asset/jquery",
-            "version": "3.4.1",
+            "version": "3.5.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/jquery/jquery-dist.git",
-                "reference": "15bc73803f76bc53b654b9fdbbbc096f56d7c03d"
+                "reference": "4c0e4becb8263bb5b3e6dadc448d8e7305ef8215"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jquery/jquery-dist/zipball/15bc73803f76bc53b654b9fdbbbc096f56d7c03d",
-                "reference": "15bc73803f76bc53b654b9fdbbbc096f56d7c03d"
+                "url": "https://api.github.com/repos/jquery/jquery-dist/zipball/4c0e4becb8263bb5b3e6dadc448d8e7305ef8215",
+                "reference": "4c0e4becb8263bb5b3e6dadc448d8e7305ef8215"
             },
             "type": "bower-asset",
             "license": [
@@ -142,6 +142,55 @@
             "time": "2018-03-26T11:24:36+00:00"
         },
         {
+            "name": "dicr/yii2-validate",
+            "version": "2.0.8",
+            "source": {
+                "type": "git",
+                "url": "https://gitlab.com/dicr/yii2-validate.git",
+                "reference": "dbaef2f515482658ced56cbe4c6f27b3ed6d54ee"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://gitlab.com/api/v4/projects/dicr%2Fyii2-validate/repository/archive.zip?sha=dbaef2f515482658ced56cbe4c6f27b3ed6d54ee",
+                "reference": "dbaef2f515482658ced56cbe4c6f27b3ed6d54ee",
+                "shasum": ""
+            },
+            "require": {
+                "php": "~7.2",
+                "yiisoft/yii2": "~2.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~8.5",
+                "roave/security-advisories": "dev-master"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "dicr\\validate\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Igor Tarasov",
+                    "email": "develop@dicr.org",
+                    "homepage": "http://dicr.org",
+                    "role": "developer"
+                }
+            ],
+            "description": "Validation components for Yii2",
+            "homepage": "https://gitlab.com/dicr/yii2-validate",
+            "keywords": [
+                "php",
+                "validate",
+                "yii2"
+            ],
+            "time": "2020-07-08T14:07:40+00:00"
+        },
+        {
             "name": "ezyang/htmlpurifier",
             "version": "v4.13.0",
             "source": {
@@ -193,21 +242,21 @@
         },
         {
             "name": "yiisoft/yii2",
-            "version": "2.0.35",
+            "version": "2.0.36",
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii2-framework.git",
-                "reference": "d42809e4969cdc0adb97197ba32774b3e4cd9e8e"
+                "reference": "a557111ea6c27794b98c98b76ff3f127eb55f309"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/d42809e4969cdc0adb97197ba32774b3e4cd9e8e",
-                "reference": "d42809e4969cdc0adb97197ba32774b3e4cd9e8e",
+                "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/a557111ea6c27794b98c98b76ff3f127eb55f309",
+                "reference": "a557111ea6c27794b98c98b76ff3f127eb55f309",
                 "shasum": ""
             },
             "require": {
                 "bower-asset/inputmask": "~3.2.2 | ~3.3.5",
-                "bower-asset/jquery": "3.4.*@stable | 3.3.*@stable | 3.2.*@stable | 3.1.*@stable | 2.2.*@stable | 2.1.*@stable | 1.11.*@stable | 1.12.*@stable",
+                "bower-asset/jquery": "3.5.*@stable | 3.4.*@stable | 3.3.*@stable | 3.2.*@stable | 3.1.*@stable | 2.2.*@stable | 2.1.*@stable | 1.11.*@stable | 1.12.*@stable",
                 "bower-asset/punycode": "1.3.*",
                 "bower-asset/yii2-pjax": "~2.0.1",
                 "cebe/markdown": "~1.0.0 | ~1.1.0 | ~1.2.0",
@@ -303,7 +352,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-05-02T11:11:31+00:00"
+            "time": "2020-07-07T21:45:32+00:00"
         },
         {
             "name": "yiisoft/yii2-composer",
@@ -382,7 +431,8 @@
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
-        "php": ">=7.2"
+        "php": "~7.2",
+        "ext-mbstring": "*"
     },
     "platform-dev": [],
     "plugin-api-version": "1.1.0"
