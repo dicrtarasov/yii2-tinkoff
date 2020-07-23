@@ -1,0 +1,16 @@
+<!--
+  ~ @author Igor A Tarasov <develop@dicr.org>, http://dicr.org
+  ~ @version 12.07.20 23:24:44
+  -->
+
+<phpunit
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.2/phpunit.xsd"
+        bootstrap="tests/bootstrap.php"
+>
+    <testsuites>
+        <testsuite name="My Test Suite">
+            <directory>tests</directory>
+        </testsuite>
+    </testsuites>
+</phpunit>

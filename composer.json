@@ -1,8 +1,8 @@
 {
     "name": "dicr/yii2-tinkoff",
+    "type": "yii2-extension",
     "description": "Tinkoff bank support for Yii2",
     "license": "MIT",
-    "type": "yii2-extension",
     "keywords": ["dicr", "php", "yii2", "tinkoff"],
     "homepage": "https://gitlab.com/dicr/yii2-tinkoff",
     "authors": [
@@ -21,6 +21,11 @@
             "dicr\\tinkoff\\": "src/"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "dicr\\tests\\": "tests/"
+        }
+    },
     "minimum-stability": "dev",
     "prefer-stable": true,
     "require": {
@@ -28,6 +33,9 @@
         "ext-mbstring": "*",
         "yiisoft/yii2": "~2.0",
         "dicr/yii2-validate": "~2.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~9.2"
     },
     "repositories": [
         {"type": "git", "url": "https://gitlab.com/dicr/yii2-helper.git"},

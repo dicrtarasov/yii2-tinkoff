@@ -1,21 +1,22 @@
 <?php
 /**
  * @author Igor A Tarasov <develop@dicr.org>, http://dicr.org
- * @version 24.07.20 00:32:23
+ * @version 24.07.20 01:26:24
  */
 
 declare(strict_types = 1);
 namespace dicr\tinkoff;
 
+use dicr\validate\PhoneValidator;
 use dicr\validate\ValidateException;
 use yii\base\DynamicModel;
 use yii\base\InvalidArgumentException;
 use yii\base\Model;
 use function array_filter;
+use function array_keys;
 use function array_map;
 use function array_reduce;
 use function array_values;
-use function preg_replace;
 use function sprintf;
 use function trim;
 
@@ -70,7 +71,7 @@ class LightweightRequest extends Model
     public $showcaseId;
 
     /** @var string|null [20] указывается в случае, если на товар распространяется акции (например, рассрочки). */
-    public $promoCode = self::PROMO_DEFAULT;
+    public $promoCode;
 
     /**
      * @var string|null [64] Номер заказа в системе магазина.
@@ -147,46 +148,49 @@ class LightweightRequest extends Model
             ['items', 'default'],
             ['items', function($attribute) {
                 foreach ($this->items ?: [] as &$item) {
-                    $model = DynamicModel::validateData($item, [
-                        ['name', 'trim'],
-                        ['name', 'required'],
-                        ['name', 'string', 'max' => 255],
+                    $model = (new DynamicModel([
+                        'name', 'price', 'quantity', 'vendorCode', 'category'
+                    ]))
+                        ->addRule('name', 'trim')
+                        ->addRule('name', 'required')
+                        ->addRule('name', 'string', ['max' => 255])
+                        ->addRule('price', 'required')
+                        ->addRule('price', 'number', ['min' => 0.01])
+                        ->addRule('price', 'filter', ['filter' => 'floatval'])
+                        ->addRule('quantity', 'required')
+                        ->addRule('quantity', 'integer', ['min' => 1])
+                        ->addRule('vendorCode', 'trim')
+                        ->addRule('vendorCode', 'default')
+                        ->addRule('vendorCode', 'string', ['max' => 64])
+                        ->addRule('category', 'default')
+                        ->addRule('category', 'string', ['max' => 255]);
 
-                        ['price', 'required'],
-                        ['price', 'number', 'min' => 0.01],
-                        ['price', 'filter', 'filter' => 'floatval'],
-
-                        ['quantity', 'required'],
-                        ['quantity', 'integer', 'min' => 1],
-
-                        ['vendorCode', 'default'],
-                        ['vendorCode', 'string', 'max' => 64],
-
-                        ['category', 'default'],
-                        ['category', 'string', 'max' => 255]
-                    ]);
+                    $model->attributes = $item;
+                    $model->validate();
 
                     if ($model->hasErrors()) {
                         $errorAttr = array_keys($model->firstErrors)[0];
                         $this->addError($attribute, $errorAttr . ': ' . $model->getFirstError($errorAttr));
                     } else {
-                        $item = $model->attributes;
+                        $item = array_filter($model->attributes, static function($val) {
+                            return $val !== null;
+                        });
                     }
                 }
             }, 'skipOnEmpty' => true],
 
             ['sum', 'required'],
-            ['sum', 'number', 'min' => 0.01],
+            ['sum', 'number', 'min' => self::SUM_MIN],
             ['sum', 'filter', 'filter' => 'floatval'],
 
             ['customerNumber', 'default'],
             ['customerNumber', 'string', 'max' => 64],
 
             ['customerPhone', 'default'],
-            ['customerPhone', 'filter', 'filter' => static function($val) {
-                return preg_replace('~[\D]+~u', '', (string)$val);
-            }],
-            ['customerPhone', 'string', 'min' => 10, 'max' => 11],
+            ['customerPhone', PhoneValidator::class],
+            ['customerPhone', 'filter', 'filter' => static function($phone) {
+                return $phone ? PhoneValidator::format($phone) : null;
+            }, 'skipOnEmpty' => true],
 
             ['customerEmail', 'default'],
             ['customerEmail', 'email'],
@@ -226,7 +230,7 @@ class LightweightRequest extends Model
             throw new InvalidArgumentException('sum');
         }
 
-        $this->sum = $sum;
+        $this->_sum = $sum;
     }
 
     /**
