@@ -143,24 +143,18 @@
         },
         {
             "name": "dicr/yii2-validate",
-            "version": "2.0.8",
+            "version": "2.0.14",
             "source": {
                 "type": "git",
                 "url": "https://gitlab.com/dicr/yii2-validate.git",
-                "reference": "dbaef2f515482658ced56cbe4c6f27b3ed6d54ee"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://gitlab.com/api/v4/projects/dicr%2Fyii2-validate/repository/archive.zip?sha=dbaef2f515482658ced56cbe4c6f27b3ed6d54ee",
-                "reference": "dbaef2f515482658ced56cbe4c6f27b3ed6d54ee",
-                "shasum": ""
+                "reference": "ed78b0b4dcb2fb8ad92024b41d8dbfef0a8f33cf"
             },
             "require": {
                 "php": "~7.2",
                 "yiisoft/yii2": "~2.0"
             },
             "require-dev": {
-                "phpunit/phpunit": "~8.5",
+                "phpunit/phpunit": "~9.2",
                 "roave/security-advisories": "dev-master"
             },
             "type": "yii2-extension",
@@ -169,7 +163,11 @@
                     "dicr\\validate\\": "src/"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
+            "autoload-dev": {
+                "psr-4": {
+                    "dicr\\tests\\": "tests/"
+                }
+            },
             "license": [
                 "MIT"
             ],
@@ -188,7 +186,10 @@
                 "validate",
                 "yii2"
             ],
-            "time": "2020-07-08T14:07:40+00:00"
+            "support": {
+                "source": "https://gitlab.com/dicr/yii2-validate.git"
+            },
+            "time": "2020-07-19T22:50:26+00:00"
         },
         {
             "name": "ezyang/htmlpurifier",

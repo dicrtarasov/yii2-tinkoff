@@ -1,7 +1,7 @@
 <?php
 /**
  * @author Igor A Tarasov <develop@dicr.org>, http://dicr.org
- * @version 09.07.20 05:56:58
+ * @version 24.07.20 00:19:00
  */
 
 declare(strict_types = 1);
@@ -17,7 +17,6 @@ use function array_merge;
  * @property-read bool $isValid параметры товаров подходят для кредита
  *
  * @link https://tinkoff.loans/api/v1/static/documents/templates/Lightweight_Integration_Guide.RU.v1.3.pdf
- * @noinspection PhpUnused
  */
 class TinkoffService extends Component
 {

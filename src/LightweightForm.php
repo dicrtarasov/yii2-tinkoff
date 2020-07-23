@@ -1,7 +1,7 @@
 <?php
 /**
  * @author Igor A Tarasov <develop@dicr.org>, http://dicr.org
- * @version 09.07.20 05:55:11
+ * @version 24.07.20 00:33:01
  */
 
 declare(strict_types = 1);
@@ -15,8 +15,6 @@ use function ob_get_clean;
 
 /**
  * Виджет Lightweight-форма заявки на кредит в банк Тинькофф.
- *
- * @noinspection PhpUnused
  */
 class LightweightForm extends Widget
 {

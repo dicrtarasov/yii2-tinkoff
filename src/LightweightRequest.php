@@ -1,20 +1,21 @@
 <?php
 /**
  * @author Igor A Tarasov <develop@dicr.org>, http://dicr.org
- * @version 09.07.20 05:46:34
+ * @version 24.07.20 00:32:23
  */
 
 declare(strict_types = 1);
 namespace dicr\tinkoff;
 
 use dicr\validate\ValidateException;
+use yii\base\DynamicModel;
 use yii\base\InvalidArgumentException;
 use yii\base\Model;
 use function array_filter;
 use function array_map;
 use function array_reduce;
 use function array_values;
-use function mb_strlen;
+use function preg_replace;
 use function sprintf;
 use function trim;
 
@@ -35,13 +36,13 @@ class LightweightRequest extends Model
     public const ACTION_URL = 'https://loans.tinkoff.ru/api/partners/v1/lightweight/create';
 
     /** @var string адрес для тестов */
-    public const ACTION_TEST_URL = 'https://loans-qa.tcsbank.ru/api/partners/v1/lightweight/create';
+    public const TEST_URL = 'https://loans-qa.tcsbank.ru/api/partners/v1/lightweight/create';
 
     /** @var string shipId для тестов */
-    public const SHOP_TEST_ID = 'test_online';
+    public const TEST_SHOP_ID = 'test_online';
 
     /** @var string showcaseId для тестов */
-    public const SHOWCASE_TEST_ID = self::SHOP_TEST_ID;
+    public const TEST_SHOWCASE_ID = self::TEST_SHOP_ID;
 
     /** @var string код услуги "Купить в кредит" */
     public const PROMO_DEFAULT = 'default';
@@ -50,7 +51,7 @@ class LightweightRequest extends Model
     public const PROMO_INSTALLMENT = 'installment_0_0_3';
 
     /** @var string promoCode для тестов */
-    public const PROMO_TEST = self::PROMO_DEFAULT;
+    public const TEST_PROMO = self::PROMO_DEFAULT;
 
     /** @var int минимальная сумма товаров для кредита */
     public const SUM_MIN = 3000;
@@ -102,25 +103,6 @@ class LightweightRequest extends Model
     /** @var string|null [100] адрес электронной почты клиента */
     public $customerEmail;
 
-    /** @var bool режим тестирования на тестовом URL */
-    public $test = false;
-
-    /**
-     * @inheritDoc
-     */
-    public function init()
-    {
-        parent::init();
-
-        // при тестировании инициализируем тестовыми реквизитами
-        if ($this->test) {
-            $this->url = self::ACTION_TEST_URL;
-            $this->shopId = self::SHOP_TEST_ID;
-            $this->showcaseId = self::SHOWCASE_TEST_ID;
-            $this->promoCode = self::PROMO_TEST;
-        }
-    }
-
     /**
      * @inheritDoc
      */
@@ -165,34 +147,30 @@ class LightweightRequest extends Model
             ['items', 'default'],
             ['items', function($attribute) {
                 foreach ($this->items ?: [] as &$item) {
-                    $item['name'] = trim((string)($item['name'] ?? ''));
-                    $nameLen = mb_strlen($item['name']);
-                    if ($nameLen < 3 || $nameLen > 255) {
-                        $this->addError($attribute, 'Некорректное название товара: ' . $item['name']);
-                    }
+                    $model = DynamicModel::validateData($item, [
+                        ['name', 'trim'],
+                        ['name', 'required'],
+                        ['name', 'string', 'max' => 255],
 
-                    $item['price'] = (float)($item['price'] ?? 0);
-                    if ($item['price'] <= 0.01) {
-                        $this->addError($attribute, 'Некорректная цена товара: ' . $item['price']);
-                    }
+                        ['price', 'required'],
+                        ['price', 'number', 'min' => 0.01],
+                        ['price', 'filter', 'filter' => 'floatval'],
 
-                    $item['quantity'] = (int)($item['quantity'] ?? 0);
-                    if ($item['quantity'] < 1) {
-                        $this->addError($attribute, 'Некорректное количество товара: ' . $item['quantity']);
-                    }
+                        ['quantity', 'required'],
+                        ['quantity', 'integer', 'min' => 1],
 
-                    $item['vendorCode'] = trim((string)($item['vendorCode'] ?? ''));
-                    if ($item['vendorCode'] === '') {
-                        $item['vendorCode'] = null;
-                    } elseif (mb_strlen($item['vendorCode']) > 64) {
-                        $this->addError($attribute, 'Некорректный артикул товара: ' . $item['vendorCode']);
-                    }
+                        ['vendorCode', 'default'],
+                        ['vendorCode', 'string', 'max' => 64],
 
-                    $item['category'] = trim((string)($item['category'] ?? ''));
-                    if ($item['category'] === '') {
-                        $item['category'] = null;
-                    } elseif (mb_strlen($item['category']) > 255) {
-                        $this->addError($attribute, 'Некорректная длина категории товара: ' . $item['category']);
+                        ['category', 'default'],
+                        ['category', 'string', 'max' => 255]
+                    ]);
+
+                    if ($model->hasErrors()) {
+                        $errorAttr = array_keys($model->firstErrors)[0];
+                        $this->addError($attribute, $errorAttr . ': ' . $model->getFirstError($errorAttr));
+                    } else {
+                        $item = $model->attributes;
                     }
                 }
             }, 'skipOnEmpty' => true],
@@ -213,10 +191,6 @@ class LightweightRequest extends Model
             ['customerEmail', 'default'],
             ['customerEmail', 'email'],
             ['customerEmail', 'string', 'max' => 100],
-
-            ['debug', 'default', 'value' => false],
-            ['debug', 'boolean'],
-            ['debug', 'filter', 'filter' => 'boolval']
         ];
     }
 
