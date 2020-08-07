@@ -1,7 +1,7 @@
 <?php
-/**
+/*
  * @author Igor A Tarasov <develop@dicr.org>, http://dicr.org
- * @version 24.07.20 01:26:24
+ * @version 07.08.20 07:20:42
  */
 
 declare(strict_types = 1);
@@ -104,6 +104,9 @@ class LightweightRequest extends Model
     /** @var string|null [100] адрес электронной почты клиента */
     public $customerEmail;
 
+    /** @var bool не проверять сумму на минимальное значение (необходимо если кол-во товара меняется в javascript) */
+    public $skipMinSumCheck = false;
+
     /**
      * @inheritDoc
      */
@@ -180,7 +183,7 @@ class LightweightRequest extends Model
             }, 'skipOnEmpty' => true],
 
             ['sum', 'required'],
-            ['sum', 'number', 'min' => self::SUM_MIN],
+            ['sum', 'number', 'min' => $this->skipMinSumCheck ? 0 : self::SUM_MIN],
             ['sum', 'filter', 'filter' => 'floatval'],
 
             ['customerNumber', 'default'],
