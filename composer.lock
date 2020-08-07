@@ -32,7 +32,7 @@
             "version": "3.5.1",
             "source": {
                 "type": "git",
-                "url": "https://github.com/jquery/jquery-dist.git",
+                "url": "git@github.com:jquery/jquery-dist.git",
                 "reference": "4c0e4becb8263bb5b3e6dadc448d8e7305ef8215"
             },
             "dist": {
@@ -50,7 +50,7 @@
             "version": "v1.3.2",
             "source": {
                 "type": "git",
-                "url": "https://github.com/bestiejs/punycode.js.git",
+                "url": "git@github.com:bestiejs/punycode.js.git",
                 "reference": "38c8d3131a82567bfef18da09f7f4db68c84f8a3"
             },
             "dist": {
@@ -143,11 +143,11 @@
         },
         {
             "name": "dicr/yii2-validate",
-            "version": "2.0.14",
+            "version": "2.0.17",
             "source": {
                 "type": "git",
                 "url": "https://gitlab.com/dicr/yii2-validate.git",
-                "reference": "ed78b0b4dcb2fb8ad92024b41d8dbfef0a8f33cf"
+                "reference": "7c6bf5c932c7a656d4d7cfeb555bc60e5b8f73f1"
             },
             "require": {
                 "php": "~7.2",
@@ -189,7 +189,7 @@
             "support": {
                 "source": "https://gitlab.com/dicr/yii2-validate.git"
             },
-            "time": "2020-07-19T22:50:26+00:00"
+            "time": "2020-08-02T16:53:22+00:00"
         },
         {
             "name": "ezyang/htmlpurifier",
@@ -989,16 +989,16 @@
         },
         {
             "name": "phpunit/php-invoker",
-            "version": "3.0.2",
+            "version": "3.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-invoker.git",
-                "reference": "f6eedfed1085dd1f4c599629459a0277d25f9a66"
+                "reference": "7a85b66acc48cacffdf87dadd3694e7123674298"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-invoker/zipball/f6eedfed1085dd1f4c599629459a0277d25f9a66",
-                "reference": "f6eedfed1085dd1f4c599629459a0277d25f9a66",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-invoker/zipball/7a85b66acc48cacffdf87dadd3694e7123674298",
+                "reference": "7a85b66acc48cacffdf87dadd3694e7123674298",
                 "shasum": ""
             },
             "require": {
@@ -1014,7 +1014,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "3.0-dev"
+                    "dev-master": "3.1-dev"
                 }
             },
             "autoload": {
@@ -1044,7 +1044,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2020-06-26T11:53:53+00:00"
+            "time": "2020-08-06T07:04:15+00:00"
         },
         {
             "name": "phpunit/php-text-template",
@@ -1158,16 +1158,16 @@
         },
         {
             "name": "phpunit/php-token-stream",
-            "version": "4.0.3",
+            "version": "4.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-token-stream.git",
-                "reference": "5672711b6b07b14d5ab694e700c62eeb82fcf374"
+                "reference": "a853a0e183b9db7eed023d7933a858fa1c8d25a3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-token-stream/zipball/5672711b6b07b14d5ab694e700c62eeb82fcf374",
-                "reference": "5672711b6b07b14d5ab694e700c62eeb82fcf374",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-token-stream/zipball/a853a0e183b9db7eed023d7933a858fa1c8d25a3",
+                "reference": "a853a0e183b9db7eed023d7933a858fa1c8d25a3",
                 "shasum": ""
             },
             "require": {
@@ -1209,7 +1209,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2020-06-27T06:36:25+00:00"
+            "time": "2020-08-04T08:28:15+00:00"
         },
         {
             "name": "phpunit/phpunit",
@@ -2047,7 +2047,7 @@
         },
         {
             "name": "symfony/polyfill-ctype",
-            "version": "v1.18.0",
+            "version": "v1.18.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-ctype.git",
