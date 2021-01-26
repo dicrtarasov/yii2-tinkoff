@@ -1,7 +1,9 @@
 <?php
-/**
- * @author Igor A Tarasov <develop@dicr.org>, http://dicr.org
- * @version 24.07.20 00:33:01
+/*
+ * @copyright 2019-2021 Dicr http://dicr.org
+ * @author Igor A Tarasov <develop@dicr.org>
+ * @license MIT
+ * @version 27.01.21 02:18:56
  */
 
 declare(strict_types = 1);
@@ -10,6 +12,7 @@ namespace dicr\tinkoff;
 use yii\base\InvalidConfigException;
 use yii\base\Widget;
 use yii\helpers\Html;
+
 use function is_string;
 use function ob_get_clean;
 
@@ -37,7 +40,7 @@ class LightweightForm extends Widget
      * @inheritDoc
      * @throws InvalidConfigException
      */
-    public function init()
+    public function init(): void
     {
         parent::init();
 

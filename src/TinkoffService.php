@@ -1,13 +1,16 @@
 <?php
-/**
- * @author Igor A Tarasov <develop@dicr.org>, http://dicr.org
- * @version 24.07.20 00:19:00
+/*
+ * @copyright 2019-2021 Dicr http://dicr.org
+ * @author Igor A Tarasov <develop@dicr.org>
+ * @license MIT
+ * @version 27.01.21 02:18:56
  */
 
 declare(strict_types = 1);
 namespace dicr\tinkoff;
 
 use yii\base\Component;
+
 use function array_merge;
 
 /**
@@ -29,7 +32,7 @@ class TinkoffService extends Component
      * @param array $config
      * @return LightweightRequest
      */
-    public function lightweightRequest(array $config)
+    public function lightweightRequest(array $config): LightweightRequest
     {
         return new LightweightRequest(array_merge($this->lightweightConfig ?: [], $config));
     }

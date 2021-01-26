@@ -1,7 +1,9 @@
 <?php
 /*
- * @author Igor A Tarasov <develop@dicr.org>, http://dicr.org
- * @version 07.08.20 07:20:42
+ * @copyright 2019-2021 Dicr http://dicr.org
+ * @author Igor A Tarasov <develop@dicr.org>
+ * @license MIT
+ * @version 27.01.21 02:16:56
  */
 
 declare(strict_types = 1);
@@ -12,6 +14,7 @@ use dicr\validate\ValidateException;
 use yii\base\DynamicModel;
 use yii\base\InvalidArgumentException;
 use yii\base\Model;
+
 use function array_filter;
 use function array_keys;
 use function array_map;
@@ -110,7 +113,7 @@ class LightweightRequest extends Model
     /**
      * @inheritDoc
      */
-    public function attributeLabels()
+    public function attributeLabels(): array
     {
         return [
             'shopId' => 'Магазин',
@@ -129,7 +132,7 @@ class LightweightRequest extends Model
     /**
      * @inheritDoc
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             ['shopId', 'trim'],
@@ -175,9 +178,10 @@ class LightweightRequest extends Model
                         $errorAttr = array_keys($model->firstErrors)[0];
                         $this->addError($attribute, $errorAttr . ': ' . $model->getFirstError($errorAttr));
                     } else {
-                        $item = array_filter($model->attributes, static function($val) {
-                            return $val !== null;
-                        });
+                        $item = array_filter(
+                            $model->attributes,
+                            static fn($val): bool => $val !== null
+                        );
                     }
                 }
             }, 'skipOnEmpty' => true],
@@ -191,9 +195,9 @@ class LightweightRequest extends Model
 
             ['customerPhone', 'default'],
             ['customerPhone', PhoneValidator::class],
-            ['customerPhone', 'filter', 'filter' => static function($phone) {
-                return $phone ? PhoneValidator::format($phone) : null;
-            }, 'skipOnEmpty' => true],
+            ['customerPhone', 'filter',
+                'filter' => static fn($phone) => $phone ? PhoneValidator::format($phone) : null,
+                'skipOnEmpty' => true],
 
             ['customerEmail', 'default'],
             ['customerEmail', 'email'],
@@ -209,12 +213,13 @@ class LightweightRequest extends Model
      *
      * @return float
      */
-    public function getSum()
+    public function getSum(): float
     {
         if (! isset($this->_sum)) {
             $this->_sum = array_reduce($this->items ?: [], static function(float $sum, array $item) {
                 $price = (float)($item['price'] ?? 0);
                 $quantity = (int)($item['quantity'] ?? 0);
+
                 return $sum + $price * $quantity;
             }, 0);
         }
@@ -225,15 +230,15 @@ class LightweightRequest extends Model
     /**
      * Установить сумму
      *
-     * @param float $sum
+     * @param float|string $sum
      */
-    public function setSum(float $sum)
+    public function setSum($sum): void
     {
         if ($sum <= 0) {
             throw new InvalidArgumentException('sum');
         }
 
-        $this->_sum = $sum;
+        $this->_sum = (float)$sum;
     }
 
     /**
@@ -241,7 +246,7 @@ class LightweightRequest extends Model
      *
      * @return bool
      */
-    public function getIsValid()
+    public function getIsValid(): bool
     {
         return $this->sum >= self::SUM_MIN;
     }
@@ -252,7 +257,7 @@ class LightweightRequest extends Model
      * @return string[]
      * @throws ValidateException
      */
-    public function getData()
+    public function getData(): array
     {
         if (! $this->validate()) {
             throw new ValidateException($this);
@@ -286,12 +291,8 @@ class LightweightRequest extends Model
             }
         }
 
-        $data = array_map(static function($val) {
-            return trim((string)$val);
-        }, $data);
+        $data = array_map(static fn($val): string => trim((string)$val), $data);
 
-        return array_filter($data, static function($val) {
-            return $val !== null && $val !== '';
-        });
+        return array_filter($data, static fn($val): bool => $val !== null && $val !== '');
     }
 }

@@ -1,8 +1,8 @@
 {
     "name": "dicr/yii2-tinkoff",
     "type": "yii2-extension",
-    "description": "Tinkoff bank support for Yii2",
     "license": "MIT",
+    "description": "Tinkoff bank support for Yii2",
     "keywords": ["dicr", "php", "yii2", "tinkoff"],
     "homepage": "https://gitlab.com/dicr/yii2-tinkoff",
     "authors": [
@@ -26,20 +26,20 @@
             "dicr\\tests\\": "tests/"
         }
     },
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
     "prefer-stable": true,
     "require": {
-        "php": "~7.4",
+        "php": "~7.4 || ~8.0",
         "ext-mbstring": "*",
         "yiisoft/yii2": "~2.0",
-        "dicr/yii2-validate": "~2.0"
+        "dicr/yii2-validate": "~2.3"
     },
     "require-dev": {
-        "phpunit/phpunit": "~9.2"
+        "phpunit/phpunit": "~9.5"
     },
     "repositories": [
+        {"type": "composer", "url": "https://asset-packagist.org"},
         {"type": "git", "url": "https://gitlab.com/dicr/yii2-helper.git"},
-        {"type": "git", "url": "https://gitlab.com/dicr/yii2-validate.git"},
-        {"type": "composer", "url": "https://asset-packagist.org"}
+        {"type": "git", "url": "https://gitlab.com/dicr/yii2-validate.git"}
     ]
 }
