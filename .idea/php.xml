@@ -61,6 +61,9 @@
       <path value="$PROJECT_DIR$/vendor/sebastian/cli-parser" />
       <path value="$PROJECT_DIR$/vendor/nikic/php-parser" />
       <path value="$PROJECT_DIR$/vendor/sebastian/complexity" />
+      <path value="$PROJECT_DIR$/vendor/npm-asset/bootstrap" />
+      <path value="$PROJECT_DIR$/vendor/yiisoft/yii2-bootstrap4" />
+      <path value="$PROJECT_DIR$/vendor/dicr/yii2-helper" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7.4" />

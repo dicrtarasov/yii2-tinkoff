@@ -13,30 +13,40 @@
             "role": "developer"
         }
     ],
+
     "support": {
         "source": "https://gitlab.com/dicr/yii2-tinkoff.git"
     },
+
     "autoload": {
         "psr-4": {
             "dicr\\tinkoff\\": "src/"
         }
     },
+
     "autoload-dev": {
         "psr-4": {
             "dicr\\tests\\": "tests/"
         }
     },
+
     "minimum-stability": "stable",
     "prefer-stable": true,
     "require": {
         "php": "~7.4 || ~8.0",
         "ext-mbstring": "*",
+
         "yiisoft/yii2": "~2.0",
+
+        "dicr/yii2-helper": "~4.5",
         "dicr/yii2-validate": "~2.3"
     },
+
     "require-dev": {
+        "roave/security-advisories": "dev-latest",
         "phpunit/phpunit": "~9.5"
     },
+
     "repositories": [
         {"type": "composer", "url": "https://asset-packagist.org"},
         {"type": "git", "url": "https://gitlab.com/dicr/yii2-helper.git"},

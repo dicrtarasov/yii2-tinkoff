@@ -3,7 +3,7 @@
  * @copyright 2019-2021 Dicr http://dicr.org
  * @author Igor A Tarasov <develop@dicr.org>
  * @license MIT
- * @version 27.01.21 02:16:56
+ * @version 12.04.21 03:10:06
  */
 
 declare(strict_types = 1);
@@ -109,6 +109,14 @@ class LightweightRequest extends Model
 
     /** @var bool не проверять сумму на минимальное значение (необходимо если кол-во товара меняется в javascript) */
     public $skipMinSumCheck = false;
+
+    /**
+     * @inheritDoc
+     */
+    public function attributes(): array
+    {
+        return array_merge(parent::attributes(), ['sum']);
+    }
 
     /**
      * @inheritDoc

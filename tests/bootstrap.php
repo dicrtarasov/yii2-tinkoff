@@ -1,14 +1,16 @@
 <?php
-/**
- * @author Igor A Tarasov <develop@dicr.org>, http://dicr.org
- * @version 24.07.20 01:26:42
+/*
+ * @copyright 2019-2021 Dicr http://dicr.org
+ * @author Igor A Tarasov <develop@dicr.org>
+ * @license MIT
+ * @version 12.04.21 03:10:35
  */
 
 /** @noinspection PhpMissingDocCommentInspection */
 declare(strict_types = 1);
 
-define('YII_ENV', 'dev');
-define('YII_DEBUG', true);
+const YII_ENV = 'dev';
+const YII_DEBUG = true;
 
 require_once(dirname(__DIR__) . '/vendor/autoload.php');
 require_once(dirname(__DIR__) . '/vendor/yiisoft/yii2/Yii.php');
