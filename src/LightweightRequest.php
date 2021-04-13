@@ -3,7 +3,7 @@
  * @copyright 2019-2021 Dicr http://dicr.org
  * @author Igor A Tarasov <develop@dicr.org>
  * @license MIT
- * @version 12.04.21 03:10:06
+ * @version 13.04.21 11:15:40
  */
 
 declare(strict_types = 1);
@@ -58,7 +58,10 @@ class LightweightRequest extends Model
     public const TEST_PROMO = self::PROMO_DEFAULT;
 
     /** @var int минимальная сумма товаров для кредита */
-    public const SUM_MIN = 3000;
+    public const SUM_MIN = 3093;
+
+    /** @var int максимальная сумма */
+    public const SUM_MAX = 206185;
 
     /** @var string URL запроса */
     public $url = self::ACTION_URL;
@@ -195,7 +198,7 @@ class LightweightRequest extends Model
             }, 'skipOnEmpty' => true],
 
             ['sum', 'required'],
-            ['sum', 'number', 'min' => $this->skipMinSumCheck ? 0 : self::SUM_MIN],
+            ['sum', 'number', 'min' => $this->skipMinSumCheck ? 0 : self::SUM_MIN, 'max' => self::SUM_MAX],
             ['sum', 'filter', 'filter' => 'floatval'],
 
             ['customerNumber', 'default'],
